@@ -4,13 +4,18 @@
 		cust_pre_render();
 
         extract(shortcode_atts(array(
+			"cust_user_data" => '',
 			"user" => '',
-            "lock_override" => false                    
+            "lock_override" => false
 		), $atts));
 		
 		$current_user = wp_get_current_user();
 
-		$user_role = $current_user->roles[0];
+		if($cust_user_data == ""){
+			$user_role = $current_user->roles[0];
+		} else {
+			$user_role = get_the_author_meta( $cust_user_data, $current_user->ID );
+		}
 		
 		$form_lock = get_option('form_lock');
 		$is_locked = false;
