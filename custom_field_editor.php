@@ -4,7 +4,7 @@
     Plugin URI: 
     Description: Plugin which allows custom fields to be edited from the front end. Useful for creating editable chunks on pages as well as a number of other applications.
     Author: Andrew Beeken
-    Version: 0
+    Version: 0.1
     Author URI: http://www.andrewbeeken.co.uk
     */
     
@@ -21,27 +21,30 @@
     [/cust_form]
 	*/
 
-	// Globals
-	include(dirname( __FILE__ ) .'/fns/globals.php');
+	class customFieldEditor {
+		protected $pluginDir;
 
-	// Core
-	include(dirname( __FILE__ ) .'/fns/process_form.php');
+		public function __construct(){
+			$this->pluginDir = dirname(__FILE__);
 
-	// Shortcodes
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_form.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_input.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_text.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_wysiwyg.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_radio.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_check.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_dropdown.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_submit.php');
-	include(dirname( __FILE__ ) .'/fns/shortcodes/cust_printmode.php');
+			include(dirname( __FILE__ ) .'/fns/globals.php');
 
-	// Hooks
-	include(dirname( __FILE__ ) .'/fns/hooks.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_form.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_input.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_text.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_wysiwyg.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_radio.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_check.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_dropdown.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_submit.php');
+			include($this->pluginDir .'/fns/shortcodes/cust_printmode.php');
+			
+			include($this->pluginDir .'/fns/process_form.php');
+			
+			include(dirname( __FILE__ ) .'/fns/hooks.php');
+			
+			include(dirname( __FILE__ ) .'/admin/admin.php');
+		}
+	}
 
-	// Admin
-	include(dirname( __FILE__ ) .'/admin/admin.php');
-
-?>
+	$customfieldeditor = new customFieldEditor();
